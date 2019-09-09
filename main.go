@@ -36,11 +36,11 @@ func isJSONString(s string) bool {
 
 }
 
-func isJSON(s string) bool {
-	var js map[string]interface{}
-	return json.Unmarshal([]byte(s), &js) == nil
-
-}
+//func isJSON(s string) bool {
+//	var js map[string]interface{}
+//	return json.Unmarshal([]byte(s), &js) == nil
+//
+//}
 
 func isJSONRaw(str string) bool {
 	var js json.RawMessage
@@ -60,12 +60,21 @@ func main() {
 	//	log.Printf("===> isJSONRaw %+v", isJSONRaw(t))
 	//}
 
-	j := string(`"name":"idiot=required,min=1,max=5"`)
+	j := string(`{"name":"idiot=required,min=1,max=5"}`)
+
+	if isJSON(j) {
+		log.Println("====> error not json")
+	}
+
 	//t := T{Name: "name", Value: j}
 	sp := strings.Split(j, ":")
 
 	log.Printf("====> raw %+v", j)
 	log.Printf("====> raw split %+v", sp[1])
+
+	for i := 0; i < len(sp); i++ {
+		log.Printf("====> i %+v", sp[i])
+	}
 
 	//v := reflect.Indirect(reflect.ValueOf(&t))
 	//v = v.FieldByName("Value")
@@ -84,4 +93,9 @@ func test(v reflect.Value) {
 		fmt.Printf("Default: v: %+v , v.Type(): %+v\n", v, v.Type())
 	}
 
+}
+
+func isJSON(str string) bool {
+	var js json.RawMessage
+	return json.Unmarshal([]byte(str), &js) == nil
 }
