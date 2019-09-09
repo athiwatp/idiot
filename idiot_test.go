@@ -32,7 +32,6 @@ func Test_ExtractJSONField(t *testing.T) {
 		//sections := strings.Split(logMessage, "\n")
 		//assert.Equal(t, "Query: var1=1&var2=2", sections[1])
 		//assert.Equal(t, `Body: {"a":"[HiddenField]","b":2,"c":"3"}`, sections[2])
-		//assert.Equal(t, "x-velo-auth: tokenString", sections[3])
 	})
 
 	t.Run("Happy - Nested json field", func(t *testing.T) {
