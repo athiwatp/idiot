@@ -11,6 +11,12 @@ func Validate(schema string, document string) {
 	schemaLoader := gojsonschema.NewStringLoader(schema)
 	documentLoader := gojsonschema.NewStringLoader(document)
 
+	sl := gojsonschema.NewSchemaLoader()
+	sl.Draft = gojsonschema.Draft7
+	sl.AutoDetect = true
+	sl.Validate = true
+	sl.Compile(schemaLoader)
+
 	result, err := gojsonschema.Validate(schemaLoader, documentLoader)
 	if err != nil {
 		panic(err.Error())
